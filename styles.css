@@ -354,7 +354,7 @@ img{display:block;max-width:100%}
 
 /* ===== scrapbook grid (photos/polaroids/letters) ===== */
 .scrapbook{
-  position:relative; min-height:1360px;
+  position:relative; min-height:1440px;
 }
 .scrap{position:absolute;transition:transform .4s cubic-bezier(.2,.7,.2,1);}
 .scrap:hover{transform:rotate(0deg) scale(1.03) !important;z-index:5}
