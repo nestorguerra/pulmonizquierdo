@@ -243,7 +243,7 @@ function ScrapbookSection(){
     { kind:'poly', x:'81%', y:20,   w:320, r:5,  img:'g13',             tone:'sepia', cap:'la madera, lo demás viene después' },
 
     { kind:'poly', x:'2%',  y:420, w:320, r:3,  img:'flowers',         tone:'sepia', cap:'lo que se guardó sin querer guardarlo' },
-    { kind:'strip', x:'22%', y:490, rows:['rain','flowers','curtain','sea'] },
+    { kind:'poly', x:'22%', y:490, w:320, r:-6, img:'handOnGuitar', tone:'sepia', cap:'rasgar con la mano equivocada' },
     { kind:'poly', x:'42%', y:420, w:320, r:-4, img:'guitarLineup',    tone:'sepia', cap:'las que esperan turno' },
     { kind:'ticket', x:'73%', y:490, big:'Mientes',  row:'02 · LP01 · MADRID', row2:'ACTO I · FRICCIÓN' },
     { kind:'poly', x:'78%', y:570, w:320, r:6,  img:'mirrorGibson',    tone:'blue',  cap:'por la rendija del armario' },
