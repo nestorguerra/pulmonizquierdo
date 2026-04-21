@@ -235,24 +235,24 @@ function LyricsSection({ ctl }){
 function ScrapbookSection(){
   // items with absolute positions so it feels curated
   const items = [
-    { kind:'poly', x:'2%',  y:10,   w:260, r:-4, img:'bwPlane',  tone:'sepia', cap:'la sala, antes de apagar' },
-    { kind:'poly', x:'22%', y:260,  w:220, r:3,  img:'curtain',  tone:'dust',  cap:'la casa, aún con cosas' },
+    { kind:'poly', x:'1%',  y:10,   w:390, r:-4, img:'bwPlane',  tone:'sepia', cap:'la sala, antes de apagar' },
+    { kind:'poly', x:'18%', y:320,  w:340, r:3,  img:'curtain',  tone:'dust',  cap:'la casa, aún con cosas' },
     { kind:'letter', x:'40%', y:20, w:330, r:-2, text:["13 de marzo,", "lo que dijiste no cabía en", "ninguna parte. lo metí en", "una canción. no sabría", "decir en cuál.","— n."] },
-    { kind:'poly', x:'68%', y:60,   w:240, r:6,  img:'marshallLesPaul', tone:'sepia', cap:'el único ruido permitido' },
-    { kind:'ticket', x:'4%', y:540, big:'Mientes',  row:'02 · LP01 · MADRID', row2:'ACTO I · FRICCIÓN' },
-    { kind:'poly', x:'42%', y:430, w:280, r:4,  img:'flowers',  tone:'sepia', cap:'lo que se guardó sin querer guardarlo' },
-    { kind:'strip', x:'72%', y:380, rows:['rain','flowers','curtain','sea'] },
-    { kind:'poly', x:'18%', y:660, w:260, r:-3, img:'eye',      tone:'blue',  cap:'de plata, se dijo entonces' },
-    { kind:'poly', x:'4%',  y:830, w:220, r:4,  img:'g13',      tone:'sepia', cap:'la madera, lo demás viene después' },
-    { kind:'letter', x:'50%', y:740, w:300, r:2, text:["febrero, sótano,", "las manos se equivocan", "mejor de madrugada.", "la 09 · toma única.", "— n."]},
-    { kind:'ticket', x:'76%', y:760, big:'Sin ti me muero', row:'09 · LP01 · MADRID', row2:'ACTO III · ASFIXIA' },
+    { kind:'poly', x:'62%', y:80,   w:380, r:6,  img:'marshallLesPaul', tone:'sepia', cap:'el único ruido permitido' },
+    { kind:'ticket', x:'2%', y:680, big:'Mientes',  row:'02 · LP01 · MADRID', row2:'ACTO I · FRICCIÓN' },
+    { kind:'poly', x:'38%', y:500, w:420, r:4,  img:'flowers',  tone:'sepia', cap:'lo que se guardó sin querer guardarlo' },
+    { kind:'strip', x:'74%', y:440, rows:['rain','flowers','curtain','sea'] },
+    { kind:'poly', x:'14%', y:820, w:400, r:-3, img:'eye',      tone:'blue',  cap:'de plata, se dijo entonces' },
+    { kind:'poly', x:'2%',  y:1060, w:340, r:4,  img:'g13',     tone:'sepia', cap:'la madera, lo demás viene después' },
+    { kind:'letter', x:'52%', y:940, w:300, r:2, text:["febrero, sótano,", "las manos se equivocan", "mejor de madrugada.", "la 09 · toma única.", "— n."]},
+    { kind:'ticket', x:'74%', y:960, big:'Sin ti me muero', row:'09 · LP01 · MADRID', row2:'ACTO III · ASFIXIA' },
 
-    // new additions — extend the scrapbook downward (rows 1000+ keep the composition loose)
-    { kind:'poly', x:'10%', y:1000, w:260, r:-3, img:'playAcoustic',     tone:'sepia', cap:'tocar a puerta cerrada' },
-    { kind:'poly', x:'38%', y:1020, w:260, r:2,  img:'guitarMacro',      tone:'sepia', cap:'la cuerda, justo antes de sonar' },
-    { kind:'poly', x:'66%', y:980,  w:240, r:-2, img:'pedalboardAcoust', tone:'blue',  cap:'lo que hay encima de la alfombra' },
-    { kind:'poly', x:'28%', y:1280, w:220, r:4,  img:'mirrorGibson',     tone:'blue',  cap:'por la rendija del armario' },
-    { kind:'ticket', x:'58%', y:1300, big:'Quererte es una enfermedad', row:'04 · LP01 · MADRID', row2:'ACTO I · FRICCIÓN' },
+    // new additions — extend the scrapbook downward
+    { kind:'poly', x:'6%',  y:1260, w:400, r:-3, img:'playAcoustic',     tone:'sepia', cap:'tocar a puerta cerrada' },
+    { kind:'poly', x:'35%', y:1300, w:400, r:2,  img:'guitarMacro',      tone:'sepia', cap:'la cuerda, justo antes de sonar' },
+    { kind:'poly', x:'64%', y:1240, w:360, r:-2, img:'pedalboardAcoust', tone:'blue',  cap:'lo que hay encima de la alfombra' },
+    { kind:'poly', x:'22%', y:1620, w:340, r:4,  img:'mirrorGibson',     tone:'blue',  cap:'por la rendija del armario' },
+    { kind:'ticket', x:'58%', y:1660, big:'Quererte es una enfermedad', row:'04 · LP01 · MADRID', row2:'ACTO I · FRICCIÓN' },
   ];
   return (
     <section className="section reveal" style={{paddingTop:40,paddingBottom:40}}>
