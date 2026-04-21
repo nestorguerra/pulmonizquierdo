@@ -33,7 +33,7 @@ const TRACKS = [
   { n: "03", act: "I",   title: "Entra el aire",              titleAlt: ["Entra","el aire"],              dur: "4:36", seconds: 276, mood: "respirar",  key: "Am",  tempo: 88,  hue: 220, audio: "audio/03-entra-el-aire.mp3" },
   { n: "04", act: "I",   title: "Quererte es una enfermedad", titleAlt: ["Quererte es","una enfermedad"], dur: "4:54", seconds: 294, mood: "fiebre",    key: "Cm",  tempo: 82,  hue: 22, audio: "audio/04-quererte-es-una-enfermedad.mp3?v=2" },
   // ACTO II — Anatomía de tu Ausencia
-  { n: "05", act: "II",  title: "De tus dulces bocados",      titleAlt: ["De tus dulces","bocados"],      dur: "5:02", seconds: 302, mood: "oscuro",    key: "D#m", tempo: 72,  hue: 22, audio: "audio/05-de-tus-dulces-bocados.mp3" },
+  { n: "05", act: "II",  title: "De tus dulces bocados",      titleAlt: ["De tus dulces","bocados"],      dur: "5:02", seconds: 302, mood: "oscuro",    key: "D#m", tempo: 72,  hue: 22, audio: "audio/05-de-tus-dulces-bocados.mp3?v=2" },
   { n: "06", act: "II",  title: "Si ya no te tengo",          titleAlt: ["Si ya no","te tengo"],          dur: "5:16", seconds: 316, mood: "aliento",   key: "Em",  tempo: 68,  hue: 22 },
   { n: "07", act: "II",  title: "Por haberte perdido",        titleAlt: ["Por haberte","perdido"],        dur: "4:22", seconds: 262, mood: "duelo",     key: "Gm",  tempo: 76,  hue: 22,  audio: "audio/07-por-haberte-perdido.mp3" },
   { n: "08", act: "II",  title: "Y saber si eres mía",        titleAlt: ["Y saber","si eres mía"],        dur: "4:48", seconds: 288, mood: "abstinencia", key: "Dm",  tempo: 84,  hue: 22 },
