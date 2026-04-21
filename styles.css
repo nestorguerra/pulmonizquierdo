@@ -176,7 +176,7 @@ img{display:block;max-width:100%}
 }
 
 /* ===== sections ===== */
-.section{padding:120px 48px;position:relative}
+.section{padding:72px 48px;position:relative}
 .section__rail{
   display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:baseline;
   padding-bottom:28px;margin-bottom:56px;
@@ -190,7 +190,7 @@ img{display:block;max-width:100%}
 .section__aside{font-family:'Caveat',cursive;font-size:20px;color:var(--ink-dim);max-width:260px;text-align:right;line-height:1.25;transform:rotate(-.5deg)}
 
 /* ===== acts (three chapters of the libretto) ===== */
-.act{margin-bottom:88px}
+.act{margin-bottom:64px}
 .act:last-child{margin-bottom:0}
 .act__head{
   display:grid;grid-template-columns:120px 1fr auto;gap:32px;align-items:baseline;

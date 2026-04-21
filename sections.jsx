@@ -51,7 +51,7 @@ function HeroPostcard({ bandName, albumTitle, author, tagline, onPlay }){
             Anatomía <em>de una</em> <span className="hand">asfixia</span>
           </span>
         </h1>
-        <div className="hero__sub rise d3">"{tagline}"</div>
+        <div className="hero__sub rise d3" style={{whiteSpace:'pre-line'}}>"{tagline.replace(/,\s*/, ',\n')}"</div>
         <div className="hero__byline rise d3">doce canciones · cincuenta y dos minutos · una sola voz</div>
         <button className="hero__cta rise d3" onClick={onPlay}>
           empezar por el final <Icon.Arrow size={16}/>
@@ -420,7 +420,7 @@ function AlbumSection({ ctl, albumTitle, author }){
 // === MAKING OF — home-studio collage ===
 function MakingOfSection(){
   return (
-    <section className="section reveal" id="grabacion" style={{paddingTop:40}}>
+    <section className="section reveal" id="grabacion" style={{paddingTop:40, paddingBottom:24}}>
       <Rail num="—" title="El taller" aside="Donde se grabó. Nada que mirar, en realidad." />
 
       <div style={{
@@ -477,7 +477,7 @@ function MakingOfSection(){
       </div>
 
       <div style={{
-        maxWidth:720, margin:'48px auto 0', textAlign:'center',
+        maxWidth:720, margin:'32px auto 0', textAlign:'center',
         fontFamily:"'Cormorant Garamond',serif", fontStyle:'italic', fontSize:22, lineHeight:1.5,
         color:'var(--ink-2)'
       }}>
