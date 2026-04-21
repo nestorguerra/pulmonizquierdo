@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="10" fill="#efe7d6"/>
+  <g fill="none" stroke="#1a1613" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M32 10 L32 28"/>
+    <path d="M32 28 Q20 30 16 40 Q14 50 22 54 Q30 56 32 50 Z"/>
+    <path d="M32 28 Q44 30 48 40 Q50 50 42 54 Q34 56 32 50 Z" fill="#8b2a1a" fill-opacity=".9"/>
+  </g>
+  <text x="32" y="62" font-family="Special Elite, monospace" font-size="6" text-anchor="middle" fill="#1a1613">p·i</text>
+</svg>
