@@ -354,7 +354,7 @@ img{display:block;max-width:100%}
 
 /* ===== scrapbook grid (photos/polaroids/letters) ===== */
 .scrapbook{
-  position:relative; min-height:2050px;
+  position:relative; min-height:2850px;
 }
 .scrap{position:absolute;transition:transform .4s cubic-bezier(.2,.7,.2,1);}
 .scrap:hover{transform:rotate(0deg) scale(1.03) !important;z-index:5}
@@ -373,7 +373,7 @@ img{display:block;max-width:100%}
   background:#1a1410;padding:8px;box-shadow:0 14px 34px var(--shadow);
   display:grid;grid-template-rows:repeat(4,1fr);gap:6px;
 }
-.scrap--strip .scrap__img{width:260px;aspect-ratio:3/2;overflow:hidden;background:#000}
+.scrap--strip .scrap__img{width:340px;aspect-ratio:3/2;overflow:hidden;background:#000}
 .scrap--ticket{
   background:#f4ecd6;padding:14px 20px;
   font-family:'Special Elite',monospace;font-size:10px;color:var(--ink-2);letter-spacing:.12em;
