@@ -251,7 +251,8 @@ function ScrapbookSection(){
     { kind:'poly', x:'2%',  y:880, w:320, r:-2, img:'playAcoustic',    tone:'sepia', cap:'tocar a puerta cerrada' },
     { kind:'poly', x:'22%', y:960, w:320, r:5,  img:'guitarMacro',     tone:'sepia', cap:'la cuerda, justo antes de sonar' },
     { kind:'poly', x:'42%', y:880, w:320, r:-3, img:'pedalboardAcoust', tone:'blue', cap:'lo que hay encima de la alfombra' },
-    { kind:'letter', x:'66%', y:940, w:300, r:3, text:["febrero, sótano,", "las manos se equivocan", "mejor de madrugada.", "la 09 · toma única.", "— n."]},
+    { kind:'letter', x:'62%', y:920, w:280, r:3, text:["febrero, sótano,", "las manos se equivocan", "mejor de madrugada.", "la 09 · toma única.", "— n."]},
+    { kind:'poly', x:'80%', y:870, w:320, r:-4, img:'studioWindow', tone:'sepia', cap:'lo que se oye desde la cabina' },
 
     { kind:'ticket', x:'3%', y:1340, big:'Sin ti me muero', row:'09 · LP01 · MADRID', row2:'ACTO III · ASFIXIA' },
     { kind:'ticket', x:'38%', y:1340, big:'Quererte es una enfermedad', row:'04 · LP01 · MADRID', row2:'ACTO I · FRICCIÓN' },

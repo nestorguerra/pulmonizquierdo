@@ -41,6 +41,7 @@ const MEDIA = {
   marshallLesPaul:  { img: P+"marshall-lespaul.jpg",    tone: "sepia" },
   guitarLineup:     { img: P+"guitar-lineup.jpg",       tone: "sepia" },
   handOnGuitar:     { img: P+"hand-on-guitar.jpg",      tone: "sepia" },
+  studioWindow:     { img: P+"studio-window.jpg",       tone: "sepia" },
   // same source as bwGear but in full color with a heavier vintage cast
   gearOverhead:     { img: P+"bw-gear.jpg",             tone: "sepia", vintage: true },
 
