@@ -549,48 +549,60 @@ function Footer({ bandName, author, albumTitle }){
   const [sent, setSent] = useState(false);
   return (
     <footer className="footer" id="contacto">
-      {/* ── sello discográfico · simple y desgastado ── */}
-      <div style={{
-        position:'absolute', top:22, right:24,
-        width:144, padding:'16px 12px 12px',
-        background:'#ece2c4',
-        border:'1.5px solid #3a2a1e',
-        boxShadow:'0 4px 10px rgba(0,0,0,.14)',
-        transform:'rotate(-2.4deg)',
-        textAlign:'center', color:'#3a2a1e',
-        fontFamily:"'Special Elite', monospace",
-        /* ink stamp look: ragged edge via clip-path + fade via opacity */
-        opacity:.86,
-        clipPath:'polygon(2% 0, 98% 1%, 100% 12%, 99% 88%, 97% 100%, 2% 99%, 0 80%, 1% 20%)',
-      }} aria-hidden>
-        {/* minimal vinyl mark */}
-        <svg viewBox="0 0 40 40" width="28" height="28" style={{display:'block', margin:'0 auto 8px', opacity:.7}}>
-          <circle cx="20" cy="20" r="18" fill="none" stroke="#3a2a1e" strokeWidth="1"/>
-          <circle cx="20" cy="20" r="6"  fill="#6b2318"/>
-          <circle cx="20" cy="20" r="1"  fill="#ece2c4"/>
+      {/* ── sello redondo de tinta, estilo sello de biblioteca ── */}
+      <div aria-hidden style={{
+        position:'absolute', top:26, right:28,
+        width:150, height:150,
+        transform:'rotate(-9deg)',
+        mixBlendMode:'multiply',
+        opacity:.78,
+        filter:'contrast(1.15) url(#stamp-ink)',
+      }}>
+        <svg viewBox="0 0 160 160" width="150" height="150">
+          <defs>
+            {/* ruido para bordes rotos de la tinta */}
+            <filter id="stamp-ink" x="-10%" y="-10%" width="120%" height="120%">
+              <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="5" result="noise"/>
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8"/>
+            </filter>
+            {/* trayectorias curvas para el texto */}
+            <path id="arc-top"    d="M 22 80 A 58 58 0 0 1 138 80"  fill="none"/>
+            <path id="arc-bottom" d="M 24 82 A 56 56 0 0 0 136 82"  fill="none"/>
+          </defs>
+
+          <g fill="none" stroke="#6e1e10" strokeWidth="2.6" strokeLinecap="round">
+            {/* círculo exterior */}
+            <circle cx="80" cy="80" r="68"/>
+            {/* círculo interior */}
+            <circle cx="80" cy="80" r="56" strokeWidth="1"/>
+          </g>
+
+          {/* texto curvo superior */}
+          <text fill="#6e1e10" fontFamily="'Special Elite', monospace"
+                fontSize="11" letterSpacing="3" fontWeight="700">
+            <textPath href="#arc-top" startOffset="50%" textAnchor="middle">
+              PULMÓN  ·  IZQUIERDO
+            </textPath>
+          </text>
+          {/* texto curvo inferior (invertido para que no salga al revés) */}
+          <text fill="#6e1e10" fontFamily="'Special Elite', monospace"
+                fontSize="8" letterSpacing="4" fontWeight="700">
+            <textPath href="#arc-bottom" startOffset="50%" textAnchor="middle">
+              ★  AUTOEDITADO  ·  MADRID  ★
+            </textPath>
+          </text>
+
+          {/* centro: línea separadora + año + sello */}
+          <g fill="#6e1e10">
+            <line x1="40" y1="76" x2="120" y2="76" stroke="#6e1e10" strokeWidth=".8"/>
+            <line x1="40" y1="96" x2="120" y2="96" stroke="#6e1e10" strokeWidth=".8"/>
+            <text x="80" y="92" textAnchor="middle"
+                  fontFamily="'Fraunces', serif" fontStyle="italic" fontSize="15"
+                  fontWeight="600">
+              MMXXVI
+            </text>
+          </g>
         </svg>
-
-        <div style={{
-          fontFamily:"'Fraunces', serif",
-          fontVariationSettings:"'opsz' 144, 'SOFT' 50, 'WONK' 1",
-          fontWeight:700, textTransform:'uppercase',
-          fontSize:13, lineHeight:1, letterSpacing:'.01em',
-          margin:'0 0 10px',
-        }}>Pulmón<br/>Izquierdo</div>
-
-        <div style={{
-          fontSize:7.5, letterSpacing:'.28em', textTransform:'uppercase',
-          opacity:.75,
-        }}>
-          ℗ &amp; © MMXXVI
-        </div>
-
-        {/* desgaste: ruido de tinta superpuesto */}
-        <div style={{
-          position:'absolute', inset:0, pointerEvents:'none',
-          mixBlendMode:'multiply', opacity:.55,
-          backgroundImage:`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.15  0 0 0 0 0.10  0 0 0 0 0.06  0 0 0 .9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")`,
-        }}/>
       </div>
       <div className="footer__grid">
         <div>
