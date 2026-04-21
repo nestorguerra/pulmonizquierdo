@@ -426,7 +426,7 @@ function MakingOfSection(){
     <section className="section reveal" id="grabacion" style={{paddingTop:40, paddingBottom:24}}>
       <Rail num="—" title="El taller" aside="Donde se grabó. Nada que mirar, en realidad." />
 
-      <div style={{
+      <div className="making-of-grid" style={{
         display:'grid',
         gridTemplateColumns:'1.4fr 1fr 1fr',
         gridTemplateRows:'320px 260px',
