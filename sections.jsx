@@ -235,26 +235,26 @@ function LyricsSection({ ctl }){
 function ScrapbookSection(){
   // items with absolute positions so it feels curated
   const items = [
-    // polaroids pequeñas/medianas, composición apretada en 4 filas
-    { kind:'poly', x:'2%',  y:10,   w:270, r:-4, img:'bwPlane',         tone:'sepia', cap:'la sala, antes de apagar' },
-    { kind:'poly', x:'22%', y:80,   w:220, r:3,  img:'curtain',         tone:'dust',  cap:'la casa, aún con cosas' },
-    { kind:'poly', x:'40%', y:20,   w:270, r:6,  img:'marshallLesPaul', tone:'sepia', cap:'el único ruido permitido' },
-    { kind:'letter', x:'68%', y:60, w:260, r:-2, text:["13 de marzo,", "lo que dijiste no cabía en", "ninguna parte. lo metí en", "una canción. no sabría", "decir en cuál.","— n."] },
+    // polaroids medianas, desordenadas, agrupadas — solape intencional, sin huecos
+    { kind:'poly', x:'1%',  y:10,   w:350, r:-5, img:'bwPlane',         tone:'sepia', cap:'la sala, antes de apagar' },
+    { kind:'poly', x:'18%', y:120,  w:290, r:4,  img:'curtain',         tone:'dust',  cap:'la casa, aún con cosas' },
+    { kind:'poly', x:'35%', y:30,   w:350, r:7,  img:'marshallLesPaul', tone:'sepia', cap:'el único ruido permitido' },
+    { kind:'letter', x:'62%', y:80, w:260, r:-3, text:["13 de marzo,", "lo que dijiste no cabía en", "ninguna parte. lo metí en", "una canción. no sabría", "decir en cuál.","— n."] },
+    { kind:'poly', x:'82%', y:20,   w:290, r:5,  img:'g13',             tone:'sepia', cap:'la madera, lo demás viene después' },
 
-    { kind:'poly', x:'4%',  y:350, w:300, r:4,  img:'flowers',         tone:'sepia', cap:'lo que se guardó sin querer guardarlo' },
-    { kind:'strip', x:'28%', y:400, rows:['rain','flowers','curtain','sea'] },
-    { kind:'poly', x:'52%', y:340, w:270, r:-3, img:'guitarLineup',    tone:'sepia', cap:'las que esperan turno' },
-    { kind:'ticket', x:'80%', y:420, big:'Mientes',  row:'02 · LP01 · MADRID', row2:'ACTO I · FRICCIÓN' },
+    { kind:'poly', x:'2%',  y:380, w:390, r:3,  img:'flowers',         tone:'sepia', cap:'lo que se guardó sin querer guardarlo' },
+    { kind:'strip', x:'25%', y:460, rows:['rain','flowers','curtain','sea'] },
+    { kind:'poly', x:'46%', y:390, w:350, r:-4, img:'guitarLineup',    tone:'sepia', cap:'las que esperan turno' },
+    { kind:'ticket', x:'78%', y:460, big:'Mientes',  row:'02 · LP01 · MADRID', row2:'ACTO I · FRICCIÓN' },
+    { kind:'poly', x:'80%', y:540, w:290, r:6,  img:'mirrorGibson',    tone:'blue',  cap:'por la rendija del armario' },
 
-    { kind:'poly', x:'3%',  y:720, w:250, r:2,  img:'g13',            tone:'sepia', cap:'la madera, lo demás viene después' },
-    { kind:'poly', x:'22%', y:680, w:280, r:-2, img:'playAcoustic',   tone:'sepia', cap:'tocar a puerta cerrada' },
-    { kind:'poly', x:'44%', y:740, w:240, r:3,  img:'guitarMacro',    tone:'sepia', cap:'la cuerda, justo antes de sonar' },
-    { kind:'poly', x:'62%', y:680, w:250, r:-3, img:'pedalboardAcoust', tone:'blue',  cap:'lo que hay encima de la alfombra' },
-    { kind:'poly', x:'82%', y:740, w:220, r:4,  img:'mirrorGibson',     tone:'blue',  cap:'por la rendija del armario' },
+    { kind:'poly', x:'2%',  y:820, w:365, r:-2, img:'playAcoustic',    tone:'sepia', cap:'tocar a puerta cerrada' },
+    { kind:'poly', x:'22%', y:900, w:310, r:5,  img:'guitarMacro',     tone:'sepia', cap:'la cuerda, justo antes de sonar' },
+    { kind:'poly', x:'42%', y:830, w:325, r:-3, img:'pedalboardAcoust', tone:'blue', cap:'lo que hay encima de la alfombra' },
+    { kind:'letter', x:'66%', y:890, w:300, r:3, text:["febrero, sótano,", "las manos se equivocan", "mejor de madrugada.", "la 09 · toma única.", "— n."]},
 
-    { kind:'letter', x:'3%', y:1060, w:300, r:2, text:["febrero, sótano,", "las manos se equivocan", "mejor de madrugada.", "la 09 · toma única.", "— n."]},
-    { kind:'ticket', x:'38%', y:1060, big:'Sin ti me muero', row:'09 · LP01 · MADRID', row2:'ACTO III · ASFIXIA' },
-    { kind:'ticket', x:'68%', y:1060, big:'Quererte es una enfermedad', row:'04 · LP01 · MADRID', row2:'ACTO I · FRICCIÓN' },
+    { kind:'ticket', x:'3%', y:1260, big:'Sin ti me muero', row:'09 · LP01 · MADRID', row2:'ACTO III · ASFIXIA' },
+    { kind:'ticket', x:'38%', y:1260, big:'Quererte es una enfermedad', row:'04 · LP01 · MADRID', row2:'ACTO I · FRICCIÓN' },
   ];
   return (
     <section className="section reveal" style={{paddingTop:40,paddingBottom:40}}>
