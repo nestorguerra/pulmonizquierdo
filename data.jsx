@@ -40,7 +40,7 @@ const TRACKS = [
   // ACTO III — La Mecánica de la Asfixia
   { n: "09", act: "III", title: "Sin ti me muero",            titleAlt: ["Sin ti","me muero"],            dur: "3:58", seconds: 238, mood: "pánico",    key: "Bm",  tempo: 118, hue: 22 },
   { n: "10", act: "III", title: "No llores más",              titleAlt: ["No llores","más"],              dur: "3:21", seconds: 201, mood: "catarsis",  key: "Em",  tempo: 112, hue: 22,  audio: "audio/10-no-llores-mas.mp3" },
-  { n: "11", act: "III", title: "Un día",                     titleAlt: ["Un","día"],                     dur: "3:48", seconds: 228, mood: "explosión", key: "Fm",  tempo: 108, hue: 22 },
+  { n: "11", act: "III", title: "Un día",                     titleAlt: ["Un","día"],                     dur: "3:48", seconds: 228, mood: "explosión", key: "Fm",  tempo: 108, hue: 22, audio: "audio/11-un-dia.mp3" },
   { n: "12", act: "III", title: "De ti y de mí",              titleAlt: ["De ti","y de mí"],              dur: "4:08", seconds: 248, mood: "cierre épico", key: "F#m", tempo: 104, hue: 22, audio: "audio/12-de-ti-y-de-mi.mp3" },
 ];
 
