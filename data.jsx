@@ -36,7 +36,7 @@ const TRACKS = [
   { n: "05", act: "II",  title: "De tus dulces bocados",      titleAlt: ["De tus dulces","bocados"],      dur: "5:02", seconds: 302, mood: "oscuro",    key: "D#m", tempo: 72,  hue: 22, audio: "audio/05-de-tus-dulces-bocados.mp3?v=3" },
   { n: "06", act: "II",  title: "Si ya no te tengo",          titleAlt: ["Si ya no","te tengo"],          dur: "5:16", seconds: 316, mood: "aliento",   key: "Em",  tempo: 68,  hue: 22,  audio: "audio/06-si-ya-no-te-tengo.mp3" },
   { n: "07", act: "II",  title: "Por haberte perdido",        titleAlt: ["Por haberte","perdido"],        dur: "4:22", seconds: 262, mood: "duelo",     key: "Gm",  tempo: 76,  hue: 22,  audio: "audio/07-por-haberte-perdido.mp3" },
-  { n: "08", act: "II",  title: "Y saber si eres mía",        titleAlt: ["Y saber","si eres mía"],        dur: "2:12", seconds: 132, mood: "abstinencia", key: "Dm",  tempo: 84,  hue: 22, instrumental: true, audio: "audio/08-y-saber-si-eres-mia.mp3" },
+  { n: "08", act: "II",  title: "Mía",                        titleAlt: ["Mía"],                          dur: "2:12", seconds: 132, mood: "abstinencia", key: "Dm",  tempo: 84,  hue: 22, instrumental: true, audio: "audio/08-y-saber-si-eres-mia.mp3" },
   // ACTO III — La Mecánica de la Asfixia
   { n: "09", act: "III", title: "Sin ti me muero",            titleAlt: ["Sin ti","me muero"],            dur: "3:58", seconds: 238, mood: "pánico",    key: "Bm",  tempo: 118, hue: 22, audio: "audio/09-sin-ti-me-muero.mp3" },
   { n: "10", act: "III", title: "No llores más",              titleAlt: ["No llores","más"],              dur: "3:21", seconds: 201, mood: "catarsis",  key: "Em",  tempo: 112, hue: 22,  audio: "audio/10-no-llores-mas.mp3" },
