@@ -202,7 +202,9 @@ function LyricsSection({ ctl }){
   const [open, setOpen] = useState(0);
   useEffect(()=>{ if(ctl.trackIdx >= 0) setOpen(ctl.trackIdx); },[ctl.trackIdx]);
   const track = TRACKS[open];
-  const body = LYRICS[track.title] || "(la letra de esta canción no se ha transcrito aún.\nlo dicho en ella queda, por ahora, donde debe: fuera del papel.)";
+  const body = track.instrumental
+    ? "(instrumental para piano.)"
+    : (LYRICS[track.title] || "(la letra de esta canción no se ha transcrito aún.\nlo dicho en ella queda, por ahora, donde debe: fuera del papel.)");
   return (
     <section className="section reveal" id="letras">
       <Rail num="02" title="Letras" aside="Lo dicho. Lo que no se atrevió. A mano, para no fiarse del teclado." />
