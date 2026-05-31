@@ -488,7 +488,7 @@ function MakingOfSection(){
       }}>
         Grabado aquí. Sin monitores de cabina, sin plan previo. Con mal equipo y con equipazo.
         Con gente y con IA. Algunas en una toma; nadie tuvo ganas de repetirlas.
-        La <em>12</em> se fue de las manos.
+        Hay un cuarto y muchas maquinas.
         <br/>Se quedó así.
       </div>
     </section>
@@ -537,9 +537,9 @@ function BioSection({ author, bandName }){
           <div className="date">Madrid, primavera de 2026 — fecha imprecisa</div>
           <p><strong>{tweaks.bandName}</strong> es un proyecto para ordenar el olvido. Un nombre elegido, más que escogido: el izquierdo es el pulmón que se nota cuando algo va mal. No hay banda. Hay un cuarto.</p>
           <p>De este disco se habló poco mientras se hacía. No había con quién. <em>Hacía treinta años. Y ahora, esto.</em> Se pensó mal, se tocó peor, se escribió casi siempre de madrugada, sin urgencia de llegar a ninguna parte —que, al final, resulta ser la urgencia más seria de todas.</p>
-          <p><em>Anatomía de una asfixia</em> trata de la ausencia como si fuera un idioma extranjero: con timidez, con errores, con la certeza de no llegar nunca del todo. Habla del aire que había y ya no está. De <em>lo que se tarda en notar</em>. De lo que no se arregla.</p>
-          <p>Se grabó por partes. Con amigos. A solas. En una habitación pequeña. Con el equipo que quería fallar. La mayoría de las tomas son las únicas tomas. Hay ruidos de fondo que nadie se atrevió a borrar; hay versos que se perdieron por el camino; hay, también, alguna línea escrita por una máquina —a estas alturas, el silencio acepta cualquier mensajero.</p>
-          <p>Gracias por haber venido hasta aquí. No hay nada más detrás de este texto.</p>
+          <p><em>Anatomía de una asfixia</em> trata de la ausencia como si fuera un idioma extranjero: con timidez, con errores, con la certeza de no llegar nunca del todo. Habla de intentar no olvidar. Habla del aire que había y ya no está. De lo que se tarda en notar. De lo que no se arregla.</p>
+          <p>Se grabó por partes. Con amigos, con amores, con desconocidos, a solas. En una habitación pequeña. Con el equipo que quería fallar. La mayoría de las tomas son las únicas tomas. Hay ruidos de fondo que no me atreví a borrar; hay versos que se perdieron por el camino; hay, también, alguna línea y acorde escrito por una máquina —a estas alturas, el silencio acepta cualquier mensajero. Nunca pensé llegar hasta aquí.</p>
+          <p>No hay nada más detrás de este texto.</p>
         </div>
       </div>
     </section>
