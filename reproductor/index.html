@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+<meta name="theme-color" content="#15110c" />
+<title>Reproductor — Pulmón Izquierdo</title>
+<meta name="description" content="Reproductor de Anatomía de una asfixia, de Pulmón Izquierdo. Pensado para escuchar en el coche." />
+
+<!-- iOS: abrir como app a pantalla completa desde la pantalla de inicio -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Pulmón Izq." />
+<link rel="apple-touch-icon" href="../photos-nestor/nestor-portrait.jpg" />
+<link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Special+Elite&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --paper:#15110c; --paper-2:#1b1611; --paper-3:#241d16;
+    --ink:#efe4cc; --ink-2:#d9cbaa; --ink-dim:#b09a78; --ink-faint:#7b6a50;
+    --rust:#c0512f;
+    --act-red:#c0512f; --act-blue:#5b86a6; --act-dust:#c2a06a;
+    --accent:var(--act-red);
+    --safe-t:env(safe-area-inset-top,0px);
+    --safe-b:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%;overflow:hidden}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:'Fraunces',Georgia,serif;
+    -webkit-font-smoothing:antialiased;
+    user-select:none;-webkit-user-select:none;
+    touch-action:manipulation;
+  }
+  .mono{font-family:'Special Elite',ui-monospace,monospace;letter-spacing:.12em}
+
+  /* radial accent glow that shifts with the act */
+  #app{
+    position:fixed;inset:0;
+    display:flex;flex-direction:column;
+    padding:calc(var(--safe-t) + 14px) 20px calc(var(--safe-b) + 16px);
+    background:
+      radial-gradient(120% 80% at 50% -10%, color-mix(in srgb,var(--accent) 26%, transparent), transparent 60%),
+      linear-gradient(180deg,var(--paper-2),var(--paper));
+    transition:background .8s ease;
+  }
+
+  /* ---------- header ---------- */
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:0 0 auto}
+  .top .brand{font-size:11px;color:var(--ink-dim);text-transform:uppercase}
+  .top .album{font-size:10px;color:var(--ink-faint);text-transform:uppercase;margin-top:3px}
+  .listbtn{
+    flex:0 0 auto;width:54px;height:54px;border-radius:16px;border:1px solid color-mix(in srgb,var(--ink) 16%,transparent);
+    background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink);
+    display:grid;place-items:center;font-size:24px;cursor:pointer;
+  }
+  .listbtn:active{background:color-mix(in srgb,var(--ink) 14%,transparent)}
+
+  /* ---------- now playing ---------- */
+  .now{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;min-height:0;padding:8px 0}
+  .cover{
+    position:relative;width:min(72vw,330px);aspect-ratio:1;border-radius:22px;overflow:hidden;
+    box-shadow:0 24px 60px -18px rgba(0,0,0,.7), 0 0 0 1px color-mix(in srgb,var(--ink) 10%,transparent) inset;
+    cursor:pointer;flex:0 1 auto;
+  }
+  .cover img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85) contrast(1.02)}
+  .cover::after{content:"";position:absolute;inset:0;background:
+     radial-gradient(120% 100% at 50% 120%, color-mix(in srgb,var(--accent) 55%, transparent), transparent 55%);
+     mix-blend-mode:soft-light;transition:background .8s ease}
+  .cover .actband{
+    position:absolute;top:12px;left:12px;padding:5px 10px;border-radius:999px;
+    background:color-mix(in srgb,var(--paper) 70%,transparent);backdrop-filter:blur(6px);
+    font-size:10px;color:var(--ink-2)
+  }
+  .cover .playhint{
+    position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:opacity .25s;
+    background:rgba(0,0,0,.28)
+  }
+  .cover .playhint svg{width:74px;height:74px;filter:drop-shadow(0 6px 16px rgba(0,0,0,.5))}
+  body.paused .cover .playhint{opacity:1}
+
+  .meta{text-align:center;width:100%}
+  .tnum{font-size:11px;color:var(--accent);transition:color .8s}
+  .ttitle{font-size:clamp(26px,7.2vw,38px);line-height:1.05;font-weight:500;margin:6px 0 4px;letter-spacing:-.01em}
+  .tsub{font-size:11px;color:var(--ink-dim);text-transform:uppercase}
+
+  /* ---------- scrubber ---------- */
+  .scrub{width:100%;flex:0 0 auto;margin-top:4px}
+  .bar{position:relative;height:44px;display:flex;align-items:center;cursor:pointer}
+  .bar .track{position:relative;width:100%;height:8px;border-radius:99px;background:color-mix(in srgb,var(--ink) 14%,transparent);overflow:hidden}
+  .bar .fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--accent);transition:width .15s linear,background .8s}
+  .bar .knob{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--ink);transform:translate(-50%,-50%);left:0;transition:left .15s linear;box-shadow:0 2px 8px rgba(0,0,0,.5)}
+  .times{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-faint);margin-top:2px}
+
+  /* ---------- transport ---------- */
+  .transport{flex:0 0 auto;display:flex;align-items:center;justify-content:center;gap:26px;margin-top:10px}
+  .tbtn{border:none;background:none;color:var(--ink);cursor:pointer;display:grid;place-items:center;border-radius:50%}
+  .tbtn svg{display:block}
+  .tbtn.side{width:78px;height:78px}
+  .tbtn.side svg{width:46px;height:46px}
+  .tbtn.side:active{background:color-mix(in srgb,var(--ink) 12%,transparent)}
+  .play{
+    width:104px;height:104px;border-radius:50%;
+    background:var(--accent);color:#fff;box-shadow:0 14px 34px -8px color-mix(in srgb,var(--accent) 80%,transparent);
+    transition:background .8s,transform .1s;
+  }
+  .play:active{transform:scale(.95)}
+  .play svg{width:46px;height:46px}
+
+  /* ---------- track list overlay ---------- */
+  .sheet{
+    position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;
+    padding:calc(var(--safe-t) + 14px) 14px calc(var(--safe-b) + 14px);
+    background:linear-gradient(180deg,var(--paper-3),var(--paper));
+    transform:translateY(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+  }
+  .sheet.open{transform:translateY(0)}
+  .sheet .shead{display:flex;align-items:center;justify-content:space-between;padding:4px 6px 10px}
+  .sheet .shead .h{font-size:13px;color:var(--ink-dim);text-transform:uppercase}
+  .closebtn{width:52px;height:52px;border-radius:14px;border:none;background:color-mix(in srgb,var(--ink) 8%,transparent);color:var(--ink);font-size:22px;cursor:pointer}
+  .rows{overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1 1 auto}
+  .actgroup{margin:8px 6px 4px;font-size:11px;color:var(--ink-faint);text-transform:uppercase;display:flex;align-items:center;gap:8px}
+  .actgroup .dot{width:9px;height:9px;border-radius:50%}
+  .row{
+    display:flex;align-items:center;gap:14px;width:100%;text-align:left;
+    padding:16px 14px;border:none;background:none;color:var(--ink);cursor:pointer;
+    border-radius:16px;min-height:68px;
+  }
+  .row:active{background:color-mix(in srgb,var(--ink) 8%,transparent)}
+  .row.active{background:color-mix(in srgb,var(--accent) 16%,transparent)}
+  .row .rn{font-size:13px;color:var(--ink-faint);width:26px;flex:0 0 auto}
+  .row.active .rn{color:var(--accent)}
+  .row .rt{flex:1 1 auto;min-width:0;display:flex;flex-direction:column}
+  .row .rt .name{font-size:19px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row .rt .sm{font-size:11px;color:var(--ink-faint);text-transform:uppercase;margin-top:2px}
+  .row .rd{font-size:12px;color:var(--ink-faint);flex:0 0 auto}
+  .row .eq{flex:0 0 auto;width:18px;height:18px;display:none}
+  .row.active.playing .eq{display:block}
+  .row.active.playing .rn{display:none}
+  .eq span{display:inline-block;width:3px;height:100%;margin:0 1px;background:var(--accent);animation:eq .9s ease-in-out infinite}
+  .eq span:nth-child(2){animation-delay:.2s}.eq span:nth-child(3){animation-delay:.4s}
+  @keyframes eq{0%,100%{height:6px}50%{height:16px}}
+
+  @media (max-height:680px){
+    .cover{width:min(46vw,210px)}
+    .ttitle{font-size:clamp(22px,6vw,30px)}
+    .play{width:88px;height:88px}.play svg{width:38px;height:38px}
+    .tbtn.side{width:64px;height:64px}.tbtn.side svg{width:38px;height:38px}
+  }
+</style>
+</head>
+<body class="paused">
+<div id="app">
+  <div class="top">
+    <div>
+      <div class="brand mono">Pulmón Izquierdo</div>
+      <div class="album mono">Anatomía de una asfixia</div>
+    </div>
+    <button class="listbtn" id="openList" aria-label="Ver canciones">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+
+  <div class="now">
+    <div class="cover" id="cover">
+      <img id="coverImg" src="../photos-nestor/bio-guitar.jpg" alt="Portada" />
+      <div class="actband mono" id="actBand">Acto I</div>
+      <div class="playhint">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="tnum mono" id="tnum">01 / 12</div>
+      <div class="ttitle" id="ttitle">Son tus ojos</div>
+      <div class="tsub mono" id="tsub">Acto I · hipnótico</div>
+    </div>
+  </div>
+
+  <div class="scrub">
+    <div class="bar" id="bar">
+      <div class="track"><div class="fill" id="fill"></div></div>
+      <div class="knob" id="knob"></div>
+    </div>
+    <div class="times mono"><span id="cur">0:00</span><span id="dur">—:—</span></div>
+  </div>
+
+  <div class="transport">
+    <button class="tbtn side" id="prev" aria-label="Anterior">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zM20 6v12L9 12z"/></svg>
+    </button>
+    <button class="tbtn play" id="play" aria-label="Reproducir">
+      <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <button class="tbtn side" id="next" aria-label="Siguiente">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM4 6v12l11-6z"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- track list -->
+<div class="sheet" id="sheet">
+  <div class="shead">
+    <div class="h mono">12 canciones · 3 actos</div>
+    <button class="closebtn" id="closeList" aria-label="Cerrar">✕</button>
+  </div>
+  <div class="rows" id="rows"></div>
+</div>
+
+<audio id="audio" preload="metadata"></audio>
+
+<script>
+(function(){
+  "use strict";
+  var BASE = "../audio/";
+  var COVER = "../photos-nestor/bio-guitar.jpg";
+
+  var ACTS = {
+    "I":   {title:"Las Leyes de la Fricción",   color:"var(--act-red)",  c:"#c0512f"},
+    "II":  {title:"Anatomía de tu Ausencia",    color:"var(--act-blue)", c:"#5b86a6"},
+    "III": {title:"La Mecánica de la Asfixia",  color:"var(--act-dust)", c:"#c2a06a"}
+  };
+
+  var TRACKS = [
+    {n:"01",act:"I",  title:"Son tus ojos",               mood:"hipnótico",     dur:"4:14", file:"01-son-tus-ojos.mp3"},
+    {n:"02",act:"I",  title:"Mientes",                    mood:"fricción",      dur:"3:42", file:"02-mientes.mp3"},
+    {n:"03",act:"I",  title:"Entra el aire",              mood:"respirar",      dur:"4:36", file:"03-entra-el-aire.mp3"},
+    {n:"04",act:"I",  title:"Quererte es una enfermedad", mood:"fiebre",        dur:"4:54", file:"04-quererte-es-una-enfermedad.mp3"},
+    {n:"05",act:"II", title:"De tus dulces bocados",      mood:"oscuro",        dur:"5:02", file:"05-de-tus-dulces-bocados.mp3"},
+    {n:"06",act:"II", title:"Si ya no te tengo",          mood:"aliento",       dur:"5:16", file:"06-si-ya-no-te-tengo.mp3"},
+    {n:"07",act:"II", title:"Por haberte perdido",        mood:"duelo",         dur:"4:22", file:"07-por-haberte-perdido.mp3"},
+    {n:"08",act:"II", title:"Mía",                        mood:"instrumental",  dur:"2:12", file:"08-y-saber-si-eres-mia.mp3"},
+    {n:"09",act:"III",title:"Sin ti me muero",            mood:"pánico",        dur:"3:58", file:"09-sin-ti-me-muero.mp3"},
+    {n:"10",act:"III",title:"No llores más",              mood:"catarsis",      dur:"3:21", file:"10-no-llores-mas.mp3"},
+    {n:"11",act:"III",title:"Un día",                     mood:"explosión",     dur:"3:48", file:"11-un-dia.mp3"},
+    {n:"12",act:"III",title:"De ti y de mí",              mood:"cierre épico",  dur:"4:08", file:"12-de-ti-y-de-mi.mp3"}
+  ];
+
+  var audio = document.getElementById('audio');
+  var idx = 0;
+
+  // ---- restore last session ----
+  try{
+    var saved = JSON.parse(localStorage.getItem('pi_player')||'{}');
+    if (typeof saved.idx === 'number' && saved.idx>=0 && saved.idx<TRACKS.length) idx = saved.idx;
+    var resumeT = (typeof saved.t === 'number') ? saved.t : 0;
+  }catch(e){ var resumeT = 0; }
+
+  var $ = function(id){return document.getElementById(id);};
+  var coverImg=$('coverImg'), actBand=$('actBand'), tnum=$('tnum'), ttitle=$('ttitle'), tsub=$('tsub');
+  var fill=$('fill'), knob=$('knob'), curEl=$('cur'), durEl=$('dur'), bar=$('bar');
+  var playIcon=$('playIcon'), app=$('app');
+
+  function fmt(s){ if(!isFinite(s)||s<0) s=0; var m=Math.floor(s/60), x=Math.floor(s%60); return m+":"+(x<10?"0":"")+x; }
+
+  function setAccent(t){
+    var c = ACTS[t.act].c;
+    document.documentElement.style.setProperty('--accent', c);
+    document.querySelector('meta[name=theme-color]').setAttribute('content','#15110c');
+  }
+
+  function load(i, autoplay){
+    idx = (i + TRACKS.length) % TRACKS.length;
+    var t = TRACKS[idx];
+    audio.src = BASE + t.file;
+    setAccent(t);
+    coverImg.src = COVER;
+    actBand.textContent = "Acto " + t.act + " · " + ACTS[t.act].title;
+    tnum.textContent = t.n + " / 12";
+    ttitle.textContent = t.title;
+    tsub.textContent = "Acto " + t.act + " · " + t.mood;
+    durEl.textContent = t.dur;
+    markRows();
+    save();
+    setMediaSession(t);
+    if (autoplay) play();
+  }
+
+  function play(){ audio.play().then(function(){ document.body.classList.remove('paused'); }).catch(function(){}); }
+  function pause(){ audio.pause(); }
+  function toggle(){ if(audio.paused) play(); else pause(); }
+
+  function next(){ load(idx+1, true); }
+  function prev(){ if(audio.currentTime>3){ audio.currentTime=0; } else { load(idx-1, true); } }
+
+  // ---- icons / state ----
+  var ICON_PLAY = '<path d="M8 5v14l11-7z"/>';
+  var ICON_PAUSE = '<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>';
+  audio.addEventListener('play', function(){
+    document.body.classList.remove('paused'); playIcon.innerHTML=ICON_PAUSE;
+    $('play').setAttribute('aria-label','Pausa');
+    if('mediaSession' in navigator) navigator.mediaSession.playbackState='playing';
+    markRows();
+  });
+  audio.addEventListener('pause', function(){
+    document.body.classList.add('paused'); playIcon.innerHTML=ICON_PLAY;
+    $('play').setAttribute('aria-label','Reproducir');
+    if('mediaSession' in navigator) navigator.mediaSession.playbackState='paused';
+    markRows();
+  });
+
+  audio.addEventListener('loadedmetadata', function(){ if(isFinite(audio.duration)) durEl.textContent=fmt(audio.duration); });
+  audio.addEventListener('timeupdate', function(){
+    var d = audio.duration||0, c = audio.currentTime||0;
+    var pct = d? (c/d*100):0;
+    fill.style.width = pct+"%"; knob.style.left = pct+"%";
+    curEl.textContent = fmt(c);
+    if(isFinite(d)) durEl.textContent = fmt(d);
+    if('mediaSession' in navigator && d && 'setPositionState' in navigator.mediaSession){
+      try{ navigator.mediaSession.setPositionState({duration:d, position:Math.min(c,d), playbackRate:1}); }catch(e){}
+    }
+    throttledSave();
+  });
+  audio.addEventListener('ended', next);
+
+  // ---- scrubbing ----
+  function seekFromX(clientX){
+    var r = bar.getBoundingClientRect();
+    var p = Math.min(1, Math.max(0, (clientX - r.left)/r.width));
+    if(audio.duration) audio.currentTime = p*audio.duration;
+  }
+  var scrubbing=false;
+  bar.addEventListener('pointerdown', function(e){ scrubbing=true; bar.setPointerCapture(e.pointerId); seekFromX(e.clientX); });
+  bar.addEventListener('pointermove', function(e){ if(scrubbing) seekFromX(e.clientX); });
+  bar.addEventListener('pointerup', function(){ scrubbing=false; });
+  bar.addEventListener('pointercancel', function(){ scrubbing=false; });
+
+  // ---- buttons ----
+  $('play').addEventListener('click', toggle);
+  $('cover').addEventListener('click', toggle);
+  $('next').addEventListener('click', next);
+  $('prev').addEventListener('click', prev);
+
+  // ---- track list ----
+  var rows = $('rows');
+  (function buildRows(){
+    var lastAct=null, html="";
+    TRACKS.forEach(function(t,i){
+      if(t.act!==lastAct){
+        lastAct=t.act;
+        html += '<div class="actgroup mono"><span class="dot" style="background:'+ACTS[t.act].c+'"></span>Acto '+t.act+' — '+ACTS[t.act].title+'</div>';
+      }
+      html += '<button class="row" data-i="'+i+'">'+
+                '<span class="rn mono">'+t.n+'</span>'+
+                '<span class="eq"><span></span><span></span><span></span></span>'+
+                '<span class="rt"><span class="name">'+t.title+'</span><span class="sm mono">'+t.mood+(t.mood==="instrumental"?'':'')+'</span></span>'+
+                '<span class="rd mono">'+t.dur+'</span>'+
+              '</button>';
+    });
+    rows.innerHTML = html;
+    rows.querySelectorAll('.row').forEach(function(el){
+      el.addEventListener('click', function(){ load(parseInt(el.dataset.i,10), true); closeSheet(); });
+    });
+  })();
+
+  function markRows(){
+    rows.querySelectorAll('.row').forEach(function(el){
+      var on = parseInt(el.dataset.i,10)===idx;
+      el.classList.toggle('active', on);
+      el.classList.toggle('playing', on && !audio.paused);
+    });
+  }
+
+  var sheet=$('sheet');
+  function openSheet(){ markRows(); sheet.classList.add('open'); }
+  function closeSheet(){ sheet.classList.remove('open'); }
+  $('openList').addEventListener('click', openSheet);
+  $('closeList').addEventListener('click', closeSheet);
+
+  // ---- MediaSession (lockscreen / CarPlay / steering wheel) ----
+  function setMediaSession(t){
+    if(!('mediaSession' in navigator)) return;
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: t.title,
+      artist: "Pulmón Izquierdo",
+      album: "Anatomía de una asfixia · Acto "+t.act,
+      artwork: [
+        {src: COVER, sizes:"512x512", type:"image/jpeg"},
+        {src: COVER, sizes:"256x256", type:"image/jpeg"}
+      ]
+    });
+  }
+  if('mediaSession' in navigator){
+    var ms = navigator.mediaSession;
+    ms.setActionHandler('play', play);
+    ms.setActionHandler('pause', pause);
+    ms.setActionHandler('previoustrack', prev);
+    ms.setActionHandler('nexttrack', next);
+    try{ ms.setActionHandler('seekto', function(d){ if(d.seekTime!=null) audio.currentTime=d.seekTime; }); }catch(e){}
+    try{ ms.setActionHandler('seekforward', function(){ audio.currentTime=Math.min((audio.duration||0),audio.currentTime+15); }); }catch(e){}
+    try{ ms.setActionHandler('seekbackward', function(){ audio.currentTime=Math.max(0,audio.currentTime-15); }); }catch(e){}
+  }
+
+  // ---- persistence ----
+  function save(){ try{ localStorage.setItem('pi_player', JSON.stringify({idx:idx, t:audio.currentTime||0})); }catch(e){} }
+  var lastSave=0;
+  function throttledSave(){ var now=Date.now(); if(now-lastSave>2000){ lastSave=now; save(); } }
+  window.addEventListener('pagehide', save);
+  window.addEventListener('beforeunload', save);
+
+  // ---- init ----
+  load(idx, false);
+  audio.addEventListener('loadedmetadata', function once(){
+    if(resumeT>0 && resumeT < (audio.duration||1e9)){ try{ audio.currentTime=resumeT; }catch(e){} }
+    audio.removeEventListener('loadedmetadata', once);
+  });
+})();
+</script>
+</body>
+</html>
